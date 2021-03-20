@@ -14,10 +14,20 @@ import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 
 class App {
-  public static void main(String[] args) throws IOException {
-    if (args.length < 2) { return; }
+  public static void main(String[] args) {
+    if (args.length < 2) {
+      System.err.println("Requires two arguments, input PDF file and output PDF file");
+      return;
+    }
 
-    var document = new PdfDocument(new PdfReader(args[0]), new PdfWriter(args[1]));
+    PdfDocument document;
+
+    try {
+      document = new PdfDocument(new PdfReader(args[0]), new PdfWriter(args[1]));
+    } catch (IOException e) {
+      System.err.println("Unable to create PdfDocument: " + e.getMessage());
+      return;
+    }
 
     visit(document.getCatalog().getPdfObject(), (obj) -> {
       if (!(obj instanceof PdfDictionary)) { return; }
