@@ -1,9 +1,9 @@
 package pdf.remove.highlights;
 
 import java.io.IOException;
-import java.util.function.Consumer;
 import java.util.ArrayDeque;
 import java.util.HashSet;
+import java.util.function.Consumer;
 
 import com.itextpdf.kernel.pdf.PdfArray;
 import com.itextpdf.kernel.pdf.PdfDictionary;
