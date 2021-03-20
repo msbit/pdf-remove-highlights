@@ -1,0 +1,16 @@
+plugins {
+  id 'application'
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  implementation group: 'com.itextpdf', name: 'kernel', version: '7.1.14'
+  implementation group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.30'
+}
+
+application {
+  mainClass = 'pdf.remove.highlights.App'
+}
