@@ -13,7 +13,7 @@ import com.itextpdf.kernel.pdf.PdfObject;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 
-public class App {
+class App {
   public static void main(String[] args) throws IOException {
     if (args.length < 2) { return; }
 
