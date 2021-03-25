@@ -15,15 +15,20 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 
 class RemoveAnnotations {
   public static void main(String[] args) {
-    if (args.length < 2) {
-      System.err.println("Requires two arguments, input PDF file and output PDF file");
+    var configuration = new Configuration();
+
+    if (!configuration.processArguments(args)) {
+      configuration.usage(System.err);
       return;
     }
 
     PdfDocument document;
 
     try {
-      document = new PdfDocument(new PdfReader(args[0]), new PdfWriter(args[1]));
+      document = new PdfDocument(
+        new PdfReader(configuration.input),
+        new PdfWriter(configuration.output)
+      );
     } catch (IOException e) {
       System.err.println("Unable to create PdfDocument: " + e.getMessage());
       return;
