@@ -8,7 +8,7 @@ repositories {
 
 dependencies {
   implementation group: 'com.itextpdf', name: 'kernel', version: '7.1.14'
-  implementation group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.30'
+  implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
 }
 
 application {
