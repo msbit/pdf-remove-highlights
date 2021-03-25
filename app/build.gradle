@@ -12,5 +12,5 @@ dependencies {
 }
 
 application {
-  mainClass = 'au.com.msbit.pdf.RemoveAnnotations'
+  mainClass = 'au.com.msbit.remove_annotations.Main'
 }

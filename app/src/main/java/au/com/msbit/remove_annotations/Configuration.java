@@ -1,4 +1,4 @@
-package au.com.msbit.pdf;
+package au.com.msbit.remove_annotations;
 
 import java.io.PrintStream;
 
@@ -23,7 +23,7 @@ class Configuration {
   }
 
   void usage(PrintStream stream) {
-    stream.println("Usage: RemoveAnnotations [options]");
+    stream.println("Usage: app [options]");
     stream.println("    -i, --input INPUT       Input PDF file");
     stream.println("    -o, --output OUTPUT     Output PDF file");
   }

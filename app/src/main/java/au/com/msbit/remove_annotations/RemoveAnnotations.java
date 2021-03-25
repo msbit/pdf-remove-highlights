@@ -1,4 +1,4 @@
-package au.com.msbit.pdf;
+package au.com.msbit.remove_annotations;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -13,7 +13,7 @@ import com.itextpdf.kernel.pdf.PdfObject;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 
-class RemoveAnnotations {
+class Main {
   public static void main(String[] args) {
     var configuration = new Configuration();
 
