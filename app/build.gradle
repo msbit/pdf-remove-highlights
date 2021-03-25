@@ -12,5 +12,5 @@ dependencies {
 }
 
 application {
-  mainClass = 'pdf.remove.highlights.App'
+  mainClass = 'au.com.msbit.pdf.RemoveAnnotations'
 }

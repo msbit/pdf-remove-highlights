@@ -1,4 +1,4 @@
-package pdf.remove.highlights;
+package au.com.msbit.pdf;
 
 import java.io.IOException;
 import java.util.ArrayDeque;
@@ -13,7 +13,7 @@ import com.itextpdf.kernel.pdf.PdfObject;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 
-class App {
+class RemoveAnnotations {
   public static void main(String[] args) {
     if (args.length < 2) {
       System.err.println("Requires two arguments, input PDF file and output PDF file");
