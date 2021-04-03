@@ -10,6 +10,10 @@ Usage: app [options]
     -o, --output OUTPUT     Output PDF file
 ```
 
+#### Requirements
+
+* JDK 16
+
 #### Building
 
 ```
