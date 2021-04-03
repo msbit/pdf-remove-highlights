@@ -2,6 +2,10 @@ plugins {
   id 'application'
 }
 
+tasks.withType(JavaCompile).configureEach {
+  options.incremental = false
+}
+
 repositories {
   jcenter()
 }

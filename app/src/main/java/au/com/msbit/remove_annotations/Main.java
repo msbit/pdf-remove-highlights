@@ -35,12 +35,11 @@ class Main {
     }
 
     visit(document.getCatalog().getPdfObject(), (obj) -> {
-      if (!(obj instanceof PdfDictionary)) { return; }
+      if (obj instanceof PdfDictionary dict) {
+        if (!dict.containsKey(PdfName.Annots)) { return; }
 
-      var dict = (PdfDictionary)obj;
-      if (!dict.containsKey(PdfName.Annots)) { return; }
-      
-      dict.remove(PdfName.Annots);
+        dict.remove(PdfName.Annots);
+      }
     });
 
     document.close();
@@ -59,12 +58,12 @@ class Main {
 
       consumer.accept(obj);
 
-      if (obj instanceof PdfDictionary) {
-        for (var v: ((PdfDictionary)obj).values()) { fifo.offerFirst(v); }
+      if (obj instanceof PdfDictionary dict) {
+        for (var v: dict.values()) { fifo.offerFirst(v); }
       }
 
-      if (obj instanceof PdfArray) {
-        for (var c: (PdfArray)obj) { fifo.offerFirst(c); }
+      if (obj instanceof PdfArray array) {
+        for (var c: array) { fifo.offerFirst(c); }
       }
     }
   }
