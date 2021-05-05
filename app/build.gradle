@@ -7,7 +7,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 repositories {
-  jcenter()
+  mavenCentral()
 }
 
 dependencies {
