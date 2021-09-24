@@ -58,12 +58,14 @@ class Main {
 
       consumer.accept(obj);
 
-      if (obj instanceof PdfDictionary dict) {
-        for (var v: dict.values()) { fifo.offerFirst(v); }
-      }
-
-      if (obj instanceof PdfArray array) {
-        for (var c: array) { fifo.offerFirst(c); }
+      switch (obj) {
+        case PdfDictionary dict -> {
+          for (var v: dict.values()) { fifo.offerFirst(v); }
+        }
+        case PdfArray array -> {
+          for (var c: array) { fifo.offerFirst(c); }
+        }
+        default -> {}
       }
     }
   }
