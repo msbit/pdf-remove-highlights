@@ -9,14 +9,12 @@ class Configuration {
   boolean processArguments(String[] args) {
     for (var i = 0; i < args.length; i++) {
       switch (args[i]) {
-        case "-i":
-        case "--input":
+        case "-i", "--input" -> {
           if (++i < args.length) { input = args[i]; }
-          break;
-        case "-o":
-        case "--output":
+        }
+        case "-o", "--output" -> {
           if (++i < args.length) { output = args[i]; }
-          break;
+        }
       }
     }
     return input != null && output != null;
