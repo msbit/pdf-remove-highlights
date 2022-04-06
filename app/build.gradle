@@ -15,8 +15,8 @@ repositories {
 }
 
 dependencies {
-  implementation group: 'com.itextpdf', name: 'kernel', version: '7.1.16'
-  implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.32'
+  implementation group: 'com.itextpdf', name: 'kernel', version: '7.2.1'
+  implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.36'
 }
 
 application {
