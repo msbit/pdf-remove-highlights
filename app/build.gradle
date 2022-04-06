@@ -2,6 +2,14 @@ plugins {
   id 'application'
 }
 
+tasks.withType(JavaCompile).configureEach {
+  options.compilerArgs.add('--enable-preview')
+}
+
+tasks.withType(JavaExec).configureEach {
+  jvmArgs.add('--enable-preview')
+}
+
 repositories {
   mavenCentral()
 }
