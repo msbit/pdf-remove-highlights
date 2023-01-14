@@ -15,28 +15,26 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 
 class Main {
   public static void main(String[] args) {
-    var configuration = Configuration.fromArguments(args);
+    Configuration.fromArguments(args).ifPresentOrElse(configuration -> {
+      PdfDocument document;
 
-    if (configuration == null) {
-      configuration.usage(System.err);
+      try {
+        document = new PdfDocument(
+          new PdfReader(configuration.input),
+          new PdfWriter(configuration.output)
+        );
+      } catch (IOException e) {
+        System.err.println("Unable to create PdfDocument: " + e.getMessage());
+        return;
+      }
+
+      visit(document.getCatalog().getPdfObject(), Main::handle);
+
+      document.close();
+    }, () -> {
+      Configuration.usage(System.err);
       return;
-    }
-
-    PdfDocument document;
-
-    try {
-      document = new PdfDocument(
-        new PdfReader(configuration.input),
-        new PdfWriter(configuration.output)
-      );
-    } catch (IOException e) {
-      System.err.println("Unable to create PdfDocument: " + e.getMessage());
-      return;
-    }
-
-    visit(document.getCatalog().getPdfObject(), Main::handle);
-
-    document.close();
+    });
   }
 
   static void visit(PdfObject root, Consumer<PdfObject> consumer) {

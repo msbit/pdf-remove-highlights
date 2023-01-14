@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -14,99 +15,107 @@ public class ConfigurationTest {
   public void fromArgumentsEmpty() {
     var result = Configuration.fromArguments(new String[]{});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsIncompleteInputOnly() {
     var result = Configuration.fromArguments(new String[]{"--input"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsInputOnly() {
     var result = Configuration.fromArguments(new String[]{"--input", "input"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsIncompleteShortInputOnly() {
     var result = Configuration.fromArguments(new String[]{"-i"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsShortInputOnly() {
     var result = Configuration.fromArguments(new String[]{"-i", "input"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsIncompleteOutputOnly() {
     var result = Configuration.fromArguments(new String[]{"--output"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsOutputOnly() {
     var result = Configuration.fromArguments(new String[]{"--output", "output"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsIncompleteShortOutputOnly() {
     var result = Configuration.fromArguments(new String[]{"-o"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsShortOutputOnly() {
     var result = Configuration.fromArguments(new String[]{"-o", "output"});
 
-    Assert.assertNull(result);
+    MatcherAssert.assertThat(result, new IsEmpty());
   }
 
   @Test
   public void fromArgumentsInputOutput() {
     var result = Configuration.fromArguments(new String[]{"--input", "input", "--output", "output"});
 
-    Assert.assertNotNull(result);
-    Assert.assertEquals("input", result.input);
-    Assert.assertEquals("output", result.output);
+    MatcherAssert.assertThat(result, new IsPresent());
+    result.ifPresent(r -> {
+      Assert.assertEquals("input", r.input);
+      Assert.assertEquals("output", r.output);
+    });
   }
 
   @Test
   public void fromArgumentsShortInputOutput() {
     var result = Configuration.fromArguments(new String[]{"-i", "input", "--output", "output"});
 
-    Assert.assertNotNull(result);
-    Assert.assertEquals("input", result.input);
-    Assert.assertEquals("output", result.output);
+    MatcherAssert.assertThat(result, new IsPresent());
+    result.ifPresent(r -> {
+      Assert.assertEquals("input", r.input);
+      Assert.assertEquals("output", r.output);
+    });
   }
 
   @Test
   public void fromArgumentsInputShortOutput() {
     var result = Configuration.fromArguments(new String[]{"--input", "input", "-o", "output"});
 
-    Assert.assertNotNull(result);
-    Assert.assertEquals("input", result.input);
-    Assert.assertEquals("output", result.output);
+    MatcherAssert.assertThat(result, new IsPresent());
+    result.ifPresent(r -> {
+      Assert.assertEquals("input", r.input);
+      Assert.assertEquals("output", r.output);
+    });
   }
 
   @Test
   public void fromArgumentsShortInputShortOutput() {
     var result = Configuration.fromArguments(new String[]{"-i", "input", "-o", "output"});
 
-    Assert.assertNotNull(result);
-    Assert.assertEquals("input", result.input);
-    Assert.assertEquals("output", result.output);
+    MatcherAssert.assertThat(result, new IsPresent());
+    result.ifPresent(r -> {
+      Assert.assertEquals("input", r.input);
+      Assert.assertEquals("output", r.output);
+    });
   }
 
   @Test

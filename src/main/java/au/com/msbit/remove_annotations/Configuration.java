@@ -1,6 +1,7 @@
 package au.com.msbit.remove_annotations;
 
 import java.io.PrintStream;
+import java.util.Optional;
 
 class Configuration {
   String input;
@@ -11,26 +12,26 @@ class Configuration {
     this.output = output;
   }
 
-  static Configuration fromArguments(String[] args) {
-    String input = null;
-    String output = null;
+  static Optional<Configuration> fromArguments(String[] args) {
+    var input = Optional.<String>empty();
+    var output = Optional.<String>empty();
 
     for (var i = 0; i < args.length; i++) {
       switch (args[i]) {
         case "-i", "--input" -> {
-          if (++i < args.length) { input = args[i]; }
+          if (++i < args.length) { input = Optional.of(args[i]); }
         }
         case "-o", "--output" -> {
-          if (++i < args.length) { output = args[i]; }
+          if (++i < args.length) { output = Optional.of(args[i]); }
         }
       }
     }
 
-    if (input == null || output == null) {
-      return null;
+    if (input.isEmpty() || output.isEmpty()) {
+      return Optional.empty();
     }
 
-    return new Configuration(input, output);
+    return Optional.of(new Configuration(input.get(), output.get()));
   }
 
   static void usage(PrintStream stream) {
