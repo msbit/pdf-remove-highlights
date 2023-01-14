@@ -34,13 +34,7 @@ class Main {
       return;
     }
 
-    visit(document.getCatalog().getPdfObject(), (obj) -> {
-      if (obj instanceof PdfDictionary dict) {
-        if (!dict.containsKey(PdfName.Annots)) { return; }
-
-        dict.remove(PdfName.Annots);
-      }
-    });
+    visit(document.getCatalog().getPdfObject(), Main::handle);
 
     document.close();
   }
@@ -67,6 +61,14 @@ class Main {
         }
         default -> {}
       }
+    }
+  }
+
+  static void handle(PdfObject obj) {
+    if (obj instanceof PdfDictionary dict) {
+      if (!dict.containsKey(PdfName.Annots)) { return; }
+
+      dict.remove(PdfName.Annots);
     }
   }
 }
