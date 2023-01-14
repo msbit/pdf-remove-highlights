@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class ConfigurationTest {
@@ -80,8 +80,8 @@ public class ConfigurationTest {
 
     MatcherAssert.assertThat(result, new IsPresent());
     result.ifPresent(r -> {
-      Assert.assertEquals("input", r.input);
-      Assert.assertEquals("output", r.output);
+      Assertions.assertEquals("input", r.input);
+      Assertions.assertEquals("output", r.output);
     });
   }
 
@@ -91,8 +91,8 @@ public class ConfigurationTest {
 
     MatcherAssert.assertThat(result, new IsPresent());
     result.ifPresent(r -> {
-      Assert.assertEquals("input", r.input);
-      Assert.assertEquals("output", r.output);
+      Assertions.assertEquals("input", r.input);
+      Assertions.assertEquals("output", r.output);
     });
   }
 
@@ -102,8 +102,8 @@ public class ConfigurationTest {
 
     MatcherAssert.assertThat(result, new IsPresent());
     result.ifPresent(r -> {
-      Assert.assertEquals("input", r.input);
-      Assert.assertEquals("output", r.output);
+      Assertions.assertEquals("input", r.input);
+      Assertions.assertEquals("output", r.output);
     });
   }
 
@@ -113,8 +113,8 @@ public class ConfigurationTest {
 
     MatcherAssert.assertThat(result, new IsPresent());
     result.ifPresent(r -> {
-      Assert.assertEquals("input", r.input);
-      Assert.assertEquals("output", r.output);
+      Assertions.assertEquals("input", r.input);
+      Assertions.assertEquals("output", r.output);
     });
   }
 

@@ -10,8 +10,8 @@ import com.itextpdf.kernel.pdf.PdfDictionary;
 import com.itextpdf.kernel.pdf.PdfName;
 import com.itextpdf.kernel.pdf.PdfObject;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class MainTest {
@@ -51,9 +51,9 @@ public class MainTest {
       visited.add(obj);
     });
 
-    Assert.assertTrue(visited.contains(arr));
-    Assert.assertTrue(visited.contains(obj1));
-    Assert.assertTrue(visited.contains(obj2));
+    Assertions.assertTrue(visited.contains(arr));
+    Assertions.assertTrue(visited.contains(obj1));
+    Assertions.assertTrue(visited.contains(obj2));
   }
 
   @Test
@@ -72,8 +72,8 @@ public class MainTest {
       visited.add(obj);
     });
 
-    Assert.assertTrue(visited.contains(dict));
-    Assert.assertTrue(visited.contains(obj1));
-    Assert.assertTrue(visited.contains(obj2));
+    Assertions.assertTrue(visited.contains(dict));
+    Assertions.assertTrue(visited.contains(obj1));
+    Assertions.assertTrue(visited.contains(obj2));
   }
 }
