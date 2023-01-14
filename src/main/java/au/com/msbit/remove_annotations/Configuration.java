@@ -6,7 +6,15 @@ class Configuration {
   String input;
   String output;
 
-  boolean processArguments(String[] args) {
+  private Configuration(String input, String output) {
+    this.input = input;
+    this.output = output;
+  }
+
+  static Configuration fromArguments(String[] args) {
+    String input = null;
+    String output = null;
+
     for (var i = 0; i < args.length; i++) {
       switch (args[i]) {
         case "-i", "--input" -> {
@@ -17,10 +25,15 @@ class Configuration {
         }
       }
     }
-    return input != null && output != null;
+
+    if (input == null || output == null) {
+      return null;
+    }
+
+    return new Configuration(input, output);
   }
 
-  void usage(PrintStream stream) {
+  static void usage(PrintStream stream) {
     stream.println("Usage: app [options]");
     stream.println("    -i, --input INPUT       Input PDF file");
     stream.println("    -o, --output OUTPUT     Output PDF file");

@@ -11,155 +11,111 @@ import org.mockito.Mockito;
 
 public class ConfigurationTest {
   @Test
-  public void processArgumentsEmpty() {
-    var configuration = new Configuration();
+  public void fromArgumentsEmpty() {
+    var result = Configuration.fromArguments(new String[]{});
 
-    var result = configuration.processArguments(new String[]{});
-
-    Assert.assertFalse(result);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsIncompleteInputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsIncompleteInputOnly() {
+    var result = Configuration.fromArguments(new String[]{"--input"});
 
-    var result = configuration.processArguments(new String[]{"--input"});
-
-    Assert.assertFalse(result);
-    Assert.assertNull(configuration.input);
-    Assert.assertNull(configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsInputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsInputOnly() {
+    var result = Configuration.fromArguments(new String[]{"--input", "input"});
 
-    var result = configuration.processArguments(new String[]{"--input", "input"});
-
-    Assert.assertFalse(result);
-    Assert.assertEquals("input", configuration.input);
-    Assert.assertNull(configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsIncompleteShortInputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsIncompleteShortInputOnly() {
+    var result = Configuration.fromArguments(new String[]{"-i"});
 
-    var result = configuration.processArguments(new String[]{"-i"});
-
-    Assert.assertFalse(result);
-    Assert.assertNull(configuration.input);
-    Assert.assertNull(configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsShortInputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsShortInputOnly() {
+    var result = Configuration.fromArguments(new String[]{"-i", "input"});
 
-    var result = configuration.processArguments(new String[]{"-i", "input"});
-
-    Assert.assertFalse(result);
-    Assert.assertEquals("input", configuration.input);
-    Assert.assertNull(configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsIncompleteOutputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsIncompleteOutputOnly() {
+    var result = Configuration.fromArguments(new String[]{"--output"});
 
-    var result = configuration.processArguments(new String[]{"--output"});
-
-    Assert.assertFalse(result);
-    Assert.assertNull(configuration.input);
-    Assert.assertNull(configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsOutputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsOutputOnly() {
+    var result = Configuration.fromArguments(new String[]{"--output", "output"});
 
-    var result = configuration.processArguments(new String[]{"--output", "output"});
-
-    Assert.assertFalse(result);
-    Assert.assertNull(configuration.input);
-    Assert.assertEquals("output", configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsIncompleteShortOutputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsIncompleteShortOutputOnly() {
+    var result = Configuration.fromArguments(new String[]{"-o"});
 
-    var result = configuration.processArguments(new String[]{"-o"});
-
-    Assert.assertFalse(result);
-    Assert.assertNull(configuration.input);
-    Assert.assertNull(configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsShortOutputOnly() {
-    var configuration = new Configuration();
+  public void fromArgumentsShortOutputOnly() {
+    var result = Configuration.fromArguments(new String[]{"-o", "output"});
 
-    var result = configuration.processArguments(new String[]{"-o", "output"});
-
-    Assert.assertFalse(result);
-    Assert.assertNull(configuration.input);
-    Assert.assertEquals("output", configuration.output);
+    Assert.assertNull(result);
   }
 
   @Test
-  public void processArgumentsInputOutput() {
-    var configuration = new Configuration();
+  public void fromArgumentsInputOutput() {
+    var result = Configuration.fromArguments(new String[]{"--input", "input", "--output", "output"});
 
-    var result = configuration.processArguments(new String[]{"--input", "input", "--output", "output"});
-
-    Assert.assertTrue(result);
-    Assert.assertEquals("input", configuration.input);
-    Assert.assertEquals("output", configuration.output);
+    Assert.assertNotNull(result);
+    Assert.assertEquals("input", result.input);
+    Assert.assertEquals("output", result.output);
   }
 
   @Test
-  public void processArgumentsShortInputOutput() {
-    var configuration = new Configuration();
+  public void fromArgumentsShortInputOutput() {
+    var result = Configuration.fromArguments(new String[]{"-i", "input", "--output", "output"});
 
-    var result = configuration.processArguments(new String[]{"-i", "input", "--output", "output"});
-
-    Assert.assertTrue(result);
-    Assert.assertEquals("input", configuration.input);
-    Assert.assertEquals("output", configuration.output);
+    Assert.assertNotNull(result);
+    Assert.assertEquals("input", result.input);
+    Assert.assertEquals("output", result.output);
   }
 
   @Test
-  public void processArgumentsInputShortOutput() {
-    var configuration = new Configuration();
+  public void fromArgumentsInputShortOutput() {
+    var result = Configuration.fromArguments(new String[]{"--input", "input", "-o", "output"});
 
-    var result = configuration.processArguments(new String[]{"--input", "input", "-o", "output"});
-
-    Assert.assertTrue(result);
-    Assert.assertEquals("input", configuration.input);
-    Assert.assertEquals("output", configuration.output);
+    Assert.assertNotNull(result);
+    Assert.assertEquals("input", result.input);
+    Assert.assertEquals("output", result.output);
   }
 
   @Test
-  public void processArgumentsShortInputShortOutput() {
-    var configuration = new Configuration();
+  public void fromArgumentsShortInputShortOutput() {
+    var result = Configuration.fromArguments(new String[]{"-i", "input", "-o", "output"});
 
-    var result = configuration.processArguments(new String[]{"-i", "input", "-o", "output"});
-
-    Assert.assertTrue(result);
-    Assert.assertEquals("input", configuration.input);
-    Assert.assertEquals("output", configuration.output);
+    Assert.assertNotNull(result);
+    Assert.assertEquals("input", result.input);
+    Assert.assertEquals("output", result.output);
   }
 
   @Test
   public void usage() {
-    var configuration = new Configuration();
-
     PrintStream stream = Mockito.mock();
 
     var order = Mockito.inOrder(stream);
 
-    configuration.usage(stream);
+    Configuration.usage(stream);
 
     order.verify(stream).println("Usage: app [options]");
     order.verify(stream).println("    -i, --input INPUT       Input PDF file");

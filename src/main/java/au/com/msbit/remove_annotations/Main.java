@@ -15,9 +15,9 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 
 class Main {
   public static void main(String[] args) {
-    var configuration = new Configuration();
+    var configuration = Configuration.fromArguments(args);
 
-    if (!configuration.processArguments(args)) {
+    if (configuration == null) {
       configuration.usage(System.err);
       return;
     }
